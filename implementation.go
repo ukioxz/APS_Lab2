@@ -4,6 +4,7 @@ import (
   "fmt"
 	"strconv"
   "strings"
+	"math"
 )
 
 func PostfixCalculation(input string) (string, error) {
@@ -13,7 +14,7 @@ func PostfixCalculation(input string) (string, error) {
 
   for _, el := range elements {
     switch el {
-    case "+", "-", "*", "/":
+    case "+", "-", "*", "/", "^":
       topIdx := len(stack) -1
       b := stack[topIdx]
       a := stack[topIdx-1]
@@ -27,6 +28,8 @@ func PostfixCalculation(input string) (string, error) {
         result = a * b
       case "/":
         result = a / b
+			case "^":
+        result = int(math.Pow(float64(a), float64(b)))
       }
     default:
       var err error
