@@ -35,13 +35,13 @@ func PostfixCalculation(input string) (string, error) {
       var err error
       result, err = strconv.Atoi(el)
       if err != nil {
-        return "0", fmt.Errorf("invalid input %s")
+        return "0", fmt.Errorf("invalid input")
       }
     }
     stack = append(stack, result)
   }
   if len(stack) != 1 {
-    return "0", fmt.Errorf("empty string %s")
+    return "0", fmt.Errorf("empty string")
   }
 	res:= strconv.Itoa(result);
   return res, nil

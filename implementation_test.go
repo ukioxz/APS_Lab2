@@ -1,23 +1,27 @@
 package lab2
 
 import (
-	"fmt"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
+	. "gopkg.in/check.v1"
+	"fmt"
 )
 
-func TestPrefixToPostfix(t *testing.T) {
-	res, err := PrefixToPostfix("+ 5 * - 4 2 3")
-	if assert.Nil(t, err) {
-		assert.Equal(t, "4 2 - 3 * 5 +", res)
-	}
+func Test(t *testing.T) { TestingT(t) }
+
+type TestSuite struct{}
+
+var _ = Suite(&TestSuite{})
+
+func (s *TestSuite) TestPostfixCalculation(c *C) {
+  res, err := PostfixCalculation("7 2 +")
+	c.Assert(res, Equals, "9")
+	c.Assert(err, IsNil)
 }
 
-func ExamplePrefixToPostfix() {
-	res, _ := PrefixToPostfix("+ 2 2")
+func ExamplePostfixCalculation() {
+	res, _ := PostfixCalculation("4 2 - 3 * 5 +")
 	fmt.Println(res)
 
 	// Output:
-	// 2 2 +
+	// 11
 }
