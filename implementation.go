@@ -2,23 +2,23 @@ package lab2
 
 import (
   "fmt"
-	"strconv"
+  "strconv"
   "strings"
-	"math"
+  "math"
 )
 
 func PostfixCalculation(input string) (string, error) {
-  stack := []int{}
-	result := 0
+  stack := []float64{}
+  var result float64 = 0
   var elements = strings.Fields(input)
 
   for _, el := range elements {
     switch el {
     case "+", "-", "*", "/", "^":
-      topIdx := len(stack) -1
-      b := stack[topIdx]
-      a := stack[topIdx-1]
-      stack = stack[0: topIdx-1]
+      id := len(stack) -1
+      b := stack[id]
+      a := stack[id -1]
+      stack = stack[0: id-1]
       switch el {
       case "+":
         result = a + b
@@ -28,12 +28,12 @@ func PostfixCalculation(input string) (string, error) {
         result = a * b
       case "/":
         result = a / b
-			case "^":
-        result = int(math.Pow(float64(a), float64(b)))
+      case "^":
+        result = math.Pow(a, b)
       }
     default:
       var err error
-      result, err = strconv.Atoi(el)
+      result, err = strconv.ParseFloat(el, 64)
       if err != nil {
         return "0", fmt.Errorf("invalid input")
       }
@@ -43,6 +43,6 @@ func PostfixCalculation(input string) (string, error) {
   if len(stack) != 1 {
     return "0", fmt.Errorf("empty string")
   }
-	res:= strconv.Itoa(result);
+  res := fmt.Sprint(result);
   return res, nil
 }
