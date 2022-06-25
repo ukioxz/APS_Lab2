@@ -20,8 +20,8 @@ func (ch *ComputeHandler) Compute() error {
 	}
 	bufRead = bytes.Trim(bufRead, "\x00")
 
-	exprassion := string(bufRead)
-	trimmed := strings.Trim(exprassion, " \n")
+	expression := string(bufRead)
+	trimmed := strings.Trim(expression, " \n")
 	res, err := PostfixCalculation(trimmed)
 	if err != nil {
 		return err
